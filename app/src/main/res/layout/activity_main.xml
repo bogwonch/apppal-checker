@@ -6,11 +6,55 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                tools:context=".MainActivity">
+                tools:context=".MainActivity"
+    >
 
-    <TextView
+    <ListView
+        android:id="@+id/listApps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buttonDefault"
+        android:choiceMode="none"
+        android:textFilterEnabled="false"/>
+
+    <Button
+        android:id="@+id/buttonDefault"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonFalse"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/buttonFalse"
+        android:onClick="setDefaultPolicy"
+        android:text="ALL YES"/>
+
+    <Button
+        android:id="@+id/buttonFalse"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/button"
+        android:onClick="setFalsePolicy"
+        android:text="ALL NO"/>
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignEnd="@+id/listApps"
+        android:layout_marginEnd="92dp"
+        android:layout_toEndOf="@+id/buttonDefault"/>
+
+    <Button
+        android:id="@+id/button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/listApps"
+        android:layout_alignParentTop="true"
+        android:onClick="setPermPolicy"
+        android:text="Permissions"/>
 
 </RelativeLayout>
