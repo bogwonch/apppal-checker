@@ -13,48 +13,80 @@
         android:id="@+id/listApps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/buttonDefault"
         android:choiceMode="none"
-        android:textFilterEnabled="false"/>
-
-    <Button
-        android:id="@+id/buttonDefault"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttonFalse"
+        android:textFilterEnabled="false"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/buttons"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/buttons">
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Conservative"
+        android:id="@+id/buttonC"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/buttonFalse"
-        android:onClick="setDefaultPolicy"
-        android:text="ALL YES"/>
+        android:layout_weight="1"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textSize="@dimen/abc_text_size_caption_material"
+        android:background="@android:color/holo_green_dark"
+        android:onClick="setConservativePolicy"/>
 
     <Button
-        android:id="@+id/buttonFalse"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Advanced"
+        android:id="@+id/buttonA"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/button"
-        android:onClick="setFalsePolicy"
-        android:text="ALL NO"/>
-
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_alignEnd="@+id/listApps"
-        android:layout_marginEnd="92dp"
-        android:layout_toEndOf="@+id/buttonDefault"/>
+        android:layout_toEndOf="@+id/button"
+        android:layout_weight="1"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textSize="@dimen/abc_text_size_caption_material"
+        android:background="@android:color/holo_green_light"
+        android:nestedScrollingEnabled="true"
+        android:onClick="setAdvancedPolicy"/>
 
     <Button
-        android:id="@+id/button"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/listApps"
+        android:text="Fencesitter"
+        android:id="@+id/buttonF"
         android:layout_alignParentTop="true"
-        android:onClick="setPermPolicy"
-        android:text="Permissions"/>
+        android:layout_toEndOf="@+id/button2"
+        android:layout_weight="1"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textSize="@dimen/abc_text_size_caption_material"
+        android:background="@android:color/holo_orange_light"
+        android:onClick="setFencesitterPolicy"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Unconcerned"
+        android:id="@+id/buttonU"
+        android:layout_alignEnd="@+id/listApps"
+        android:layout_toEndOf="@+id/button3"
+        android:layout_weight="1"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textSize="@dimen/abc_text_size_caption_material"
+        android:background="@android:color/holo_red_light"
+        android:onClick="setUnconcernedPolicy"/>
+    </LinearLayout>
 
 </RelativeLayout>

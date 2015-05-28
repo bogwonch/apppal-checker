@@ -1,6 +1,7 @@
 package appguarden.apppal_checker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,9 +39,11 @@ public class MainActivity extends ActionBarActivity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    // Set the instance for AppPAL's sake
     instance = this;
 
-    setDefaultPolicy(getCurrentFocus());
+
+    setConservativePolicy(getCurrentFocus());
   }
 
   @Override
@@ -65,11 +71,12 @@ public class MainActivity extends ActionBarActivity
     return super.onOptionsItemSelected(item);
   }
 
-  public void setDefaultPolicy(View view)
+  public void setConservativePolicy(View view)
   {
     try
     {
-      this.ac = new AC("\"user\" says App isInstallable if App isAnApp.");
+      String policy = getResources().getString(R.string.linPolicy);
+      this.ac = new AC(policy+" \"user\" says App isInstallable if \"conservative-policy\" isMetBy(App).");
     } catch (IOException e)
     {
       Log.e("AppPAL", "failed to create AC");
@@ -77,11 +84,12 @@ public class MainActivity extends ActionBarActivity
     this.populateApps(view);
   }
 
-  public void setFalsePolicy(View view)
+  public void setAdvancedPolicy(View view)
   {
     try
     {
-      this.ac = new AC("\"user\" says App isInstallable if App isAnApp where true = false.");
+      String policy = getResources().getString(R.string.linPolicy);
+      this.ac = new AC(policy+" \"user\" says App isInstallable if \"advanced-policy\" isMetBy(App).");
     } catch (IOException e)
     {
       Log.e("AppPAL", "failed to create AC");
@@ -89,11 +97,12 @@ public class MainActivity extends ActionBarActivity
     this.populateApps(view);
   }
 
-  public void setPermPolicy(View view)
+  public void setFencesitterPolicy(View view)
   {
     try
     {
-      this.ac = new AC("\"user\" says App isInstallable if App isAnApp where hasPermission(App, \"android.permission.ACCESS_FINE_LOCATION\") = true.");
+      String policy = getResources().getString(R.string.linPolicy);
+      this.ac = new AC(policy+" \"user\" says App isInstallable if \"fencesitter-policy\" isMetBy(App).");
     } catch (IOException e)
     {
       Log.e("AppPAL", "failed to create AC");
@@ -101,6 +110,18 @@ public class MainActivity extends ActionBarActivity
     this.populateApps(view);
   }
 
+  public void setUnconcernedPolicy(View view)
+  {
+    try
+    {
+      String policy = getResources().getString(R.string.linPolicy);
+      this.ac = new AC(policy+" \"user\" says App isInstallable if \"unconcerned-policy\" isMetBy(App).");
+    } catch (IOException e)
+    {
+      Log.e("AppPAL", "failed to create AC");
+    }
+    this.populateApps(view);
+  }
 
   // Create the list of apps to be displayed
   public void populateApps(View view)

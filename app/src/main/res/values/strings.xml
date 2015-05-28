@@ -1,7 +1,39 @@
 <resources>
     <string name="app_name">AppPAL-Checker</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="buttonGetAppsText">Get Apps</string>
+    <string name="linPolicy">
+\"user\" says \"unconcerned-policy\" isMetBy(App)
+  if App isAnApp.
+
+\"user\" says \"real-unconcerned-policy\" isMetBy(App)
+        if App isAnApp
+  where
+    hasPermission(App, \"android.permission.GET_ACCOUNTS\") = false.
+
+\"user\" says \"fencesitter-policy\" isMetBy(App)
+  if \"unconcerned-policy\" isMetBy(App)
+  where
+    hasPermission(App, \"android.permission.ACCESS_FINE_LOCATION\") = false,
+    hasPermission(App, \"android.permission.READ_CONTACT\") = false.
+
+\"user\" says \"advanced-policy\" isMetBy(App)
+  if \"fencesitter-policy\" isMetBy(App)
+  where
+    hasPermission(App, \"android.permission.READ_PHONE_STATE\") = false,
+    hasPermission(App, \"android.permission.SEND_SMS\") = false.
+
+\"user\" says \"conservative-policy\" isMetBy(App)
+  if \"advanced-policy\" isMetBy(App)
+  where
+    hasPermission(App, \"android.permission.ACCESS_COARSE_LOCATION\") = false.
+    </string>
+
+    <string-array name="policies">
+        <item>None</item>
+        <item>Conservative</item>
+        <item>Advanced</item>
+        <item>Fence Sitter</item>
+        <item>Unconcerned</item>
+    </string-array>
 </resources>
